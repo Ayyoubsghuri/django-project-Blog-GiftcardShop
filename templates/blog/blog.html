@@ -1,0 +1,253 @@
+{%include 'header.html'%}
+{%load static%}
+<title>Blog | Everything is Lux</title>
+<?php $blog="active"; ?>
+
+<link rel="stylesheet" id="css" href="{% static 'cssbl/style.css' %}" type="text/css" ;>
+<link rel="stylesheet" id="css" href="{% static 'cssbl/stylvip.css' %}" type="text/css" ;>
+
+<link rel="stylesheet" id="css" href="{% static 'cssbl/btn.css' %}" type="text/css" ;>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+
+<script src=  
+"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
+    </script>  
+    
+    <script src=  
+"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">  
+    </script>  
+    
+    <link href=  
+"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet" type="text/css" /> 
+{%with blog="active"%}
+{%include 'body.html'%}
+{%endwith%}
+
+<style>
+    html{
+        background-color:#dbd4f5;
+    }
+    .h1{
+        font-family: 'Handlee', cursive;
+      }
+    .info {
+        color: white;
+        box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 14px;
+        margin-top: 10px;
+        text-align: center;
+        background-color: #000427;
+        border-radius: 10px;
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+    }
+    .buttono{
+        background-color:none;
+    }
+    @media screen and (max-width: 600px) {
+        .info {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
+    #myDIV{
+        display:none;
+      }
+      input{
+        width: 100%;
+        padding:10px;
+      }
+
+
+      ul {
+        list-style-type: none;
+        margin: 5;
+        padding: 5;
+        border-radius: 0px 0px 8px 8px;
+        background-color:rgb(255, 255, 255);
+        color:rgb(0, 0, 0);
+      }
+      li{
+        border-bottom: 1px solid rgb(0, 0, 0);
+        margin:5px;
+      }
+</style>
+
+<br>
+<div class="info">
+    <h3>/SHOP:
+        <br> PS: Everything you purchase well show on dashboard page <br>
+        CHOSE YOUR OPTION VIA CLICKING BUTTON DOWN BELLOW . ENJOY 
+        <h3 class="h1">If You want to search for article click on this icon : <button class="buttono" onclick="myFunction()"><i class='bx bx-face nav__icon'></i></button> or the one on the top right of page</h3>
+        
+    </h3>
+    <!-- search bar -->
+    <br>
+    <div id="myDIV">
+        <h1 class="h1">Search For Article:</h1>
+        <input type="text"  name="fname" id="tags" placeholder="Search For Article.."><br>
+    </div>
+    <!-- endsearch -->
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn disabled">Chose Type: <i class="fa fa-usd"></i></button>
+            <button class="btn" onclick="myFREE()">FREE<i class="fa fa-exclamation-circle"></i></button>
+            <button class="btn" onclick="myVIP()"> V.I.P <i class="fa fa-quote-left"></i></button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="btn-group">
+            {%if artis.has_previous%}
+            <a class="btn" href="?page={{artis.previous_page_number}} "><i class='bx bx-arrow-back nav__icon'></i>BACK</a>
+            {%endif%}
+            {%if artis.has_next%}
+            <a class="btn" href="?page={{artis.next_page_number}}">NEXT ARTICLE<i class='bx bx-skip-next nav__icon'></i></a>
+            {%endif%}
+        </div>
+    </div>
+</div>
+
+<!-- button dyal switch -->
+<div id="FREE">
+{%for arti in artis%}
+    <style>
+        .bright_back {
+            background: url("{{ arti.thumb.url }}");
+        }
+    </style>
+
+
+    <div class="movie_car" id="free">
+        <div class="info_sectio">
+            <div class="movie_heade">
+                <img class="locandina" src="{% static 'prf/13.jpg' %}" />
+                <h1>
+                    <a href="{% url 'blog:blogid' arti.slug  %}">
+                    {{ arti.title }}
+                    </a>
+                </h1>
+                <h4>
+                    {{ arti.updated_on }}
+                    {{ arti.author }}
+                </h4>
+                <span class="minute">FREE</span>
+                <p class="type">Category:</p>
+                <p class="type">
+                    {{ arti.status }}
+                </p>
+            </div>
+            <div class="movie_des">
+                <p class="tex">
+                    {{ arti.intro }}
+                </p>
+                <div class="btn-group">
+                    <button class="btn disabled">Click On: <i class="fa fa-usd"></i></button>
+                    <button class="btn"><a href="{% url 'blog:blogid' arti.slug  %}">READ ARTICLE</a></button>
+                    <!-- <button class="btn">SHARE </button> -->
+                </div>
+            </div>
+
+        </div>
+        <div class="blur_back bright_back"></div>
+    </div>
+{%endfor%}
+</div>
+
+<!-- article vip -->
+
+<div id="VIP">
+{%for artivip in artisvip%}
+    <style>
+        .bright_bac {
+            background: url("{{ artivip.thumb.url }}");
+        }
+    </style>
+    <div class="movie_card" id="bright">
+        <div class="info_section">
+            <div class="movie_header">
+                <img class="locandina" src="{% static 'prf/4.jpg' %}"/>
+                <h1>
+                    {{ artivip.title }}
+                </h1>
+                <h4>
+                    {{ artivip.updated_on }}
+                    {{ artivip.author }}
+                </h4>
+                <span class="minute">VIP</span>
+                <p class="typ">Category:</p>
+                <p class="typ">
+                    {{ artivip.status }}
+                </p>
+            </div>
+            <div class="movie_desc">
+                <p class="text">
+                    {{ artivip.intro }}
+                </p>
+                <div class="btn-group">
+                    <button class="btn disabled">Click On : </button>
+                    <button class="btn"><a href="{% url 'blog:blogidv' artivip.slug  %}">READ ARTICLE</a></button>
+                    <!-- <button class="btn"><i class="fa fa-quote-left"></i></button> -->
+                </div>
+            </div>
+
+        </div>
+        <div class="blur_back bright_bac"></div>
+    </div>
+{%endfor%}
+</div>
+<div id="sentinel"></div>
+
+<!-- script l switch page content -->
+<script>
+    function myFREE() {
+        var x = document.getElementById("VIP");
+        var y = document.getElementById("FREE");
+        x.style.display = "none";
+        y.style.display = "block";
+
+
+    }
+    function myVIP() {
+        var x = document.getElementById("VIP");
+        var y = document.getElementById("FREE");
+        x.style.display = "block";
+        y.style.display = "none";
+    }
+
+    $( function() {
+        var availableTags = [
+
+        {% for artivip in artisvip %}
+            { value: "{% url 'blog:blogidv' artivip.slug  %}",
+            label: "{{artivip.title}}"
+          },
+          {% endfor %}
+          {% for arti in artis %}
+          { value: "{% url 'blog:blogid' arti.slug  %}",
+            label: "{{arti.title}}"
+          },
+          {% endfor %}
+        ];
+        $( "#tags" ).autocomplete({
+          source: availableTags,
+          select: function( event, ui ) { 
+            window.location.href = ui.item.value;
+          }
+        });
+      } );
+
+// infinite loop
+
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+</script>
+{%include 'footer.html'%}

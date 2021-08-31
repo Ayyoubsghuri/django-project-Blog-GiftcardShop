@@ -1,0 +1,292 @@
+{%include 'header.html'%}
+{%load static%}
+<!-- header dyal sidebar -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="{% static 'jsshop/jsshop.js' %}"></script>
+<style>
+  input {
+    /* padding-: -10px; */
+    /* margin-right: 16px; */
+    /* font-size: 12px; */
+    display: none;
+  }
+
+  /* theme lmagana */
+  /* end */
+  html {
+    background-color: #dfe3ee;
+  }
+
+  h3 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    padding-top: 10px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+  }
+
+  .content {
+    width: 24%;
+    margin: 15px;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: .4s;
+    background-color: white;
+
+  }
+
+  .content:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    transform: translate(0px, -8px);
+    transition: .6s;
+  }
+
+  .img {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+  }
+
+  p {
+    text-align: center;
+    color: #b2bec3;
+    padding: 0 8px;
+  }
+
+  h6 {
+    font-size: 26px;
+    text-align: center;
+    color: #222f3e;
+    margin: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+
+  li {
+    padding: 5px;
+  }
+
+  .fa {
+    color: #ff9f43;
+    font-size: 26px;
+    transition: .4s;
+  }
+
+  .fa:hover {
+    transform: scale(1.3);
+    transition: .6s;
+  }
+
+  button {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    width: 100%;
+    padding: 15px;
+    border: 0px;
+    outline: none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .buy-1 {
+    background-color: #2183a2;
+  }
+
+  .buy-2 {
+    background-color: #3b3e6e;
+  }
+
+  .buy-3 {
+    background-color: #0b0b0b;
+  }
+
+  @media(max-width: 1000px) {
+    .content {
+      width: 46%;
+    }
+  }
+
+  @media(max-width: 750px) {
+    .content {
+      width: 100%;
+    }
+  }
+
+  /* info */
+  .info {
+    color: white;
+    box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 14px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #000427;
+    border-radius: 10px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+  }
+
+  @media screen and (max-width: 600px) {
+    .info {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  .alert {
+    padding: 20px;
+    background-color: hsl(152, 58%, 60%);
+    
+    color: white;
+  }
+  .aalert {
+    padding: 20px;
+    background-color: hsl(4, 74%, 43%);
+    
+    color: white;
+  }
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 30px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: black;
+  }
+</style>
+
+{%with shop="active"%}
+{%include 'body.html'%}
+{%endwith%}
+
+<br>
+  {% if messages == "You Can't Purchase this item because it's empty" %}
+  <div class="aalert">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+		<strong>Alert!</strong> {{ messages }} <br>
+	</div>
+  {% endif%}
+<div class="info">
+  <h3>/SHOP:
+    <br> PS: Everything you purchase well show on dashboard page. ENJOY
+  </h3>
+</div>
+<div class="gallery">
+  <div class="content">
+    <img class="img" src="{% static 'prod/netflix.png' %}">
+    <h3>Netflix</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1.99</h6>
+    <h6>QUANTITY : {{ quantity }}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="netflix" value="netflix" class="buy-1">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/hbo.png' %}">
+    <h3>HBO</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1.50</h6>
+    <h6>QUANTITY: {{ quantityhb }}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="hbo" value="hbo" class="buy-1">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/hulu.png' %}">
+    <h3>Hulu</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1.5</h6>
+    <h6>QUANTITY : {{ quantityhu}}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="hulu" value="hulu" class="buy-3">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/spotify.png' %}">
+    <h3>Spotify</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1</h6>
+    <h6>QUANTITY : {{ quantitysp}}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="spotify" value="spotify" class="buy-3">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/dezzer.png' %}">
+    <h3>Deezer</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1</h6>
+    <h6>QUANTITY: {{ quantitydz }}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="deezer" value="deezer" class="buy-1">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/nordvpn.jpg' %}">
+    <h3>NordVpn</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1.5</h6>
+    <h6>QUANTITY: {{ quantityno }}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="nordvpn" value="nordvpn" class="buy-1">Buy Now</button>
+    </form>
+  </div>
+  <div class="content">
+    <img class="img" src="{% static 'prod/vyprvpn.png' %}">
+    <h3>VyprVpn</h3>
+    <p>Dont change password or email for it can stay longer.</p>
+    <h6>$1</h6>
+    <h6>QUANTITY: {{ quantityvy }}</h6>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" name="vyprvpn" value="vyprvpn" class="buy-1">Buy Now</button>
+    </form>
+  </div>
+</div>
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
+
+{%include 'footer.html'%}

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Forget Password Done</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'csslogin/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'csslogin/main.css' %}">
+</head>
+<body>
+
+
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+					<span class="login100-form-title p-b-51">
+						Your password has been set. You may go ahead and log in now.
+	        </span>
+					
+					<div class="flex-sb-m w-full p-t-3 p-b-24">
+						
+            
+						<div class="container-login100-form-btn m-t-17">
+							<a href="{% url 'user:index' %}" class="login100-form-btn">
+							 	 Login
+							</a>
+						</div>
+					</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- <script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script> -->
+</body>
+</html>

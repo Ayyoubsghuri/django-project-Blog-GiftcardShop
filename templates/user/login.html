@@ -1,0 +1,146 @@
+{% load static %}
+{%load widget_tweaks%}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'csslogin/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'csslogin/main.css' %}">
+	<style>
+		.alert {
+			padding: 20px;
+			background-color: #f44336;
+			color: white;
+		}
+
+		.closebtn {
+			margin-left: 15px;
+			color: white;
+			font-weight: bold;
+			float: right;
+			font-size: 30px;
+			line-height: 20px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		.closebtn:hover {
+			color: black;
+		}
+
+		#message {
+			display: none;
+			background: #f1f1f1;
+			font-family: Ubuntu-Bold;
+			color: #000;
+			position: relative;
+			padding: 20px;
+			margin-top: 10px;
+		}
+
+		#message p {
+			font-family: Ubuntu-Bold;
+			padding: 0 25px;
+			font-size: 18px;
+		}
+
+		/* Add a green text color and a checkmark when the requirements are right */
+		.valid {
+			color: green;
+		}
+
+		.valid:before {
+			position: relative;
+			left: -35px;
+			content: "✔";
+		}
+
+		/* Add a red text color and an "x" when the requirements are wrong */
+		.invalid {
+			color: red;
+		}
+
+		.invalid:before {
+			position: relative;
+			left: -35px;
+			content: "✖";
+		}
+	</style>
+</head>
+
+<body>
+	{% if form.non_field_errors %}
+	<div class="alert">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {% for error in form.non_field_errors %}
+		<strong>Alert!</strong> {{ error }} <br>
+		{% endfor %}
+	</div>
+	{% endif %}
+	<!-- hadi v2 login -->
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+				<form class="login100-form validate-form flex-sb flex-w" method="post" >
+					{%csrf_token%}
+					<span class="login100-form-title p-b-51">
+						Login 
+					</span>
+
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+						{% render_field form.username class="input100" placeholder="Email or Username"%}
+
+						<!-- <input class="input100" type="email" name="email" placeholder="Email" required> -->
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+						{% render_field form.password class="input100" placeholder="Password"%}
+						<!-- <input class="input100" type="password" id="Password" name="password" placeholder="Password" -->
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-24">
+						<div class="contact100-form-checkbox">
+							<a href="{%url 'userl:reset_password' %}" class="txt1">
+								Forget password?
+							</a>
+							<br>
+						</div>
+
+						<div>
+
+							<a href="{% url 'userl:signup' %}" class="txt1">
+								Signup?
+							</a>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn m-t-17">
+
+						<input type="submit" class="login100-form-btn" value="Sign in" name="submit">
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+	<script>
+
+		if (window.history.replaceState) {
+			window.history.replaceState(null, null, window.location.href);
+		}
+		
+	</script>
+</body>
+
+</html>

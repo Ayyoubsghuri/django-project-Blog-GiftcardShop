@@ -1,0 +1,85 @@
+<style>
+.button{
+    background-color:#F7F6FB;
+    border: none;
+    width: 50px;
+    color:rgb(0, 0, 0);
+}
+</style>
+</head>
+ 
+{%load static%}
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+        
+        
+        <div class="header__img">
+            <img src="{% static 'prf/1.jpg' %}" alt="">
+        </div>
+        <!-- <div class="uname"> -->
+            {%if user.is_authenticated %}
+        <h4>Hello {{ user.username }}</h4>
+        <!-- </div> -->
+           {%endif%}
+        <div class="iside">
+           <div class="avv">
+               
+               <div class="tooltip"><a href="{% url 'userl:logout' %}"><i class='bx bx-log-out nav__icon'></i></a><span class="tooltiptext">Logout</span></div>
+               <div class="tooltip"><a href="{%url 'search:zrch'%}"><i class='bx bx-search-alt nav__icon'></i></a><span class="tooltiptext">Search 4Free Courses</span></div>
+             <div class="tooltip"><button class="button" onclick="myFunction()"><i class='bx bx-face nav__icon'></i></button><span class="tooltiptext">Referal / Search Article</span></div></div>
+        </div>
+    </header>
+<!-- modal setting -->
+
+<!-- modal end -->
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="{% url 'userl:dash' %}" class="nav__logo">
+                    <i class='bx bx-layer nav__logo-icon'></i>
+                    <span class="nav__logo-name">MoulCHI24</span>
+                </a>
+
+                <div class="nav__list">
+                    <a href="{% url 'userl:dash' %}" class="nav__link {{dash}}">
+                    <i class='bx bx-grid-alt nav__icon' ></i>
+                        <span class="nav__name">Dashboard</span>
+                    </a>
+                    
+                    <a href="{% url 'shop:indexshop' %}" class="nav__link {{shop}} ">
+                        <i class='bx bx-store-alt nav__icon'></i>
+                        <span class="nav__name">Store</span>
+                    </a>
+                    
+                    <a href="{% url 'blog:blog' %}" class="nav__link {{blog}}" >
+                        <i class='bx bx-bold nav__icon' ></i>
+                        <span class="nav__name">Blog</span>
+                    </a>
+                    <a href="{%url 'search:zrch'%}" class="nav__link {{search}}" >
+                        <i class='bx bx-search-alt nav__icon' ></i>
+                        <span class="nav__name">Udemy Sherlock</span>
+                    </a>
+
+                </div>
+            </div>
+               
+            <a href="{% url 'userl:logout' %}" class="nav__link" type="submit" >
+                <i class='bx bx-log-out nav__icon' ></i>
+                <span class="nav__name">Log Out</span>
+            </a>
+        </nav>
+    </div>
+    <!--===== MAIN JS =====-->
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "block") {
+              x.style.display = "none";
+            } else {
+              x.style.display = "block";
+            }
+          }
+    </script>

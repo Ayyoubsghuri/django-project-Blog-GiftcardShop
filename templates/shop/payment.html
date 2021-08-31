@@ -1,0 +1,104 @@
+{%include 'header.html'%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+<style>
+    body{
+        background-color:#dfe3ee;
+    }
+    .py{
+        text-align: center;
+        margin-top:3%;
+    }
+    h1{
+        text-align: center;
+        font-family: 'Handlee', cursive;
+
+    }
+    p{
+        text-align: center;
+        margin-top: -25px;
+        color: #686868;
+    }
+</style>
+{%include 'body.html'%}
+<br>
+<h1>Pay Using Paypal To Complete Your Order:</h1>
+<p><strong>Remember to check Dashboard Page to see your Purchased Account.<br> This Page will Refresh Every 50 seconds to check if there's some accounts left <br>If not you well redirect to shop page untill we add new accounts <br>We Recommend the purchase accounts before other users get it Enjoy</strong></p>
+<h1>Your Product Is : <strong> {{name}}</strong> <br> Price Is : <strong>{{pric}}$</strong> </h1>
+<div id="paypal-button-container" class="py"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AduXUnjRhbC8x7yFsVQcAERZTKULxzJiUdqNIGeB5Xyk4qpcMbcYngXu3GQ0LBXF7-LEp5WGXxRx8FL_&currency=USD"></script>
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '{{pric}}'
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    
+
+                    $.ajax({
+                        type:'POST',
+                        url:"{% url 'shop:paydone' %}",
+                        beforeSend:function(request){
+                            request.setRequestHeader('X-CSRFToken',csrftoken)
+                        },
+                        data:JSON.stringify({'isPaid':true}),
+                        success:function(data){
+                            alert('Your Payment Has Succesfuly Made it Check Dashboard Page');
+                            window.location.href='../'
+
+    
+                        }
+
+                    })
+
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+
+
+        window.setInterval('refresh()', 50000); 	
+       //5 second
+        function refresh() {
+            window .location.reload();
+        }
+
+  // function
+</script>
+
+
+
+{%include 'footer.html'%}

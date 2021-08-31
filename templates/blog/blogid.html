@@ -1,0 +1,93 @@
+{%include 'header.html'%}
+{%load static%}
+
+<style>    
+    html{
+      background-color:#dbd4f5;
+    }
+    /* Float four columns side by side */
+    .column {
+      float: right;
+      width: 30%;
+      padding: 0 10px;
+    }
+    .colum {
+      float: left;
+      width: 70%;
+      padding: 0 10px;
+      background-color: white;
+    }
+    .col {
+      float: left;
+      padding: 0 10px;
+    }
+    .col ,p{
+      margin-top:-10px;
+    }
+    
+    /* Remove extra left and right margins, due to padding */
+    .row {margin: 25px -5px;}
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+      .colum {
+         width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+    
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+    img {
+      border-radius: 50%;
+      height:50px;
+    }
+    .user{
+       display: table;
+    }
+    </style>
+
+{%with dash="active"%}
+{%include 'body.html'%}
+{%endwith%}
+<h1> {{ arti.title }}</h1>
+<div class="row">
+<img src="{% static 'prf/13.jpg' %}" alt="Avatar" class="col">
+<p><strong>{{ arti.author }}</strong> {{ arti.updated_on }} </p>
+</div>
+
+<div class="row">
+<div class="column">
+    <div class="card">
+      <a href="{% url 'blog:blog' %}">CLICK HERE TO GO BACK</a></h3>
+    </div>
+  </div>
+  <div class="colum">
+    <div class="card">
+      {{ arti.content|safe }}
+    </div>
+  </div>
+
+  
+</div>
+
+
+{%include 'footer.html'%}
