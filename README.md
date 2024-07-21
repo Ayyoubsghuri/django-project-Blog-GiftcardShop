@@ -34,7 +34,7 @@ Follow these steps to set up and run the Django project locally:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/AyoubSghuri/django-project.git
+   git clone https://github.com/AyyoubSghuri/django-project.git
    cd django-project
    ```
 Set up a virtual environment (optional but recommended):
